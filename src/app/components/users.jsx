@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import API from "../api";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
+import _ from "lodash";
 
 const Users = ({ users, ...rest }) => {
     const pageSize = 2;
@@ -35,7 +36,8 @@ const Users = ({ users, ...rest }) => {
         setCurrentPage(1);
     }, [selectedProf]);
 
-    const filteredUsers = selectedProf && selectedProf._id ? users.filter((user) => user.profession.name === selectedProf.name) : users;
+    // const filteredUsers = selectedProf && selectedProf._id ? users.filter((user) => user.profession._id === selectedProf._id) : users;
+    const filteredUsers = selectedProf && selectedProf._id ? users.filter((user) => _.isEqual(user.profession, selectedProf)) : users;
 
     const count = filteredUsers.length;
 
